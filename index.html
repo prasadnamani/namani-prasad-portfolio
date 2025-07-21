@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Namani Prasad | FullStack Developer</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles & Configuration for Tailwind -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
+        }
+        /* Custom accent color */
+        .bg-accent { background-color: #0057FF; }
+        .text-accent { color: #0057FF; }
+        .border-accent { border-color: #0057FF; }
+        .hover\:bg-accent-dark:hover { background-color: #0043cc; }
+
+        /* Dark mode specific styles */
+        body.dark {
+            background-color: #1a202c; /* Dark background */
+            color: #e2e8f0; /* Light text */
+        }
+
+        body.dark .text-gray-900 {
+            color: #e2e8f0; /* Adjust dark mode text for headings */
+        }
+
+        body.dark .text-gray-800 {
+            color: #e2e8f0; /* Adjust dark mode text for general content */
+        }
+
+        body.dark .text-gray-700 {
+            color: #cbd5e0; /* Adjust dark mode text for navigation */
+        }
+
+        body.dark .text-gray-600 {
+            color: #a0aec0; /* Adjust dark mode text for paragraphs */
+        }
+
+        body.dark .bg-white {
+            background-color: #2d3748; /* Darker background for header/mobile menu */
+        }
+
+        body.dark .shadow-sm {
+            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5); /* Darker shadow for dark mode */
+        }
+
+        body.dark .bg-gray-100 {
+            background-color: #2d3748; /* Dark background for cards */
+        }
+
+        body.dark .bg-gray-200 {
+            background-color: #4a5568; /* Darker background for skill tags */
+            color: #e2e8f0;
+        }
+
+        /* Simple animation for elements appearing on scroll */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Additional subtle animations */
+        .nav-link-hover {
+            transition: transform 0.3s ease-out, color 0.3s ease-out, background-color 0.3s ease-out;
+            padding: 8px 12px; /* Add padding for a better hover background */
+            border-radius: 6px; /* Rounded corners for the background */
+        }
+        .nav-link-hover:hover {
+            transform: scale(1.05);
+            color: white; /* Text color changes to white on hover */
+            background-color: #0043cc; /* Background color similar to button hover */
+        }
+        .button-hover:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px -3px rgba(0, 87, 255, 0.3), 0 4px 6px -2px rgba(0, 87, 255, 0.15); /* Subtle shadow on hover */
+        }
+
+        /* Card specific styles for a more modern look */
+        .modern-card {
+            border-radius: 1rem; /* Larger border-radius for softer corners */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Default shadow */
+            transition: transform 0.3s ease-out, box-shadow 0.3s ease-out; /* Smooth transitions */
+        }
+
+        .modern-card:hover {
+            transform: translateY(-8px); /* More pronounced lift on hover */
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08); /* Stronger shadow on hover */
+        }
+
+        body.dark .modern-card {
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); /* Darker default shadow */
+        }
+
+        body.dark .modern-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2); /* Even darker hover shadow */
+        }
+
+        /* Floating Dark Mode Button */
+        #dark-mode-toggle {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background-color: #0057FF;
+            color: white;
+            border-radius: 9999px; /* Fully rounded */
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #dark-mode-toggle:hover {
+            background-color: #0043cc;
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        #dark-mode-toggle svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Project Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .modal-overlay.open {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1rem;
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            opacity: 0;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+            position: relative;
+        }
+
+        .modal-overlay.open .modal-content {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        body.dark .modal-content {
+            background-color: #2d3748;
+            color: #e2e8f0;
+        }
+
+        .modal-close-button {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.2s ease;
+        }
+
+        .modal-close-button:hover {
+            color: #1a202c;
+        }
+        body.dark .modal-close-button:hover {
+            color: #e2e8f0;
+        }
+
+        /* Skill Bar Styles */
+        .skill-bar-container {
+            background-color: #e2e8f0;
+            border-radius: 0.5rem;
+            height: 1rem;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+
+        body.dark .skill-bar-container {
+            background-color: #4a5568;
+        }
+
+        .skill-bar-fill {
+            background-color: #0057FF;
+            height: 100%;
+            width: 0%; /* Initial width for animation */
+            border-radius: 0.5rem;
+            transition: width 1s ease-out;
+        }
+
+        /* Contact Form Message */
+        .form-message {
+            margin-top: 1rem;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .form-message.success {
+            background-color: #d1fae5; /* green-100 */
+            color: #065f46; /* green-800 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-message.error {
+            background-color: #fee2e2; /* red-100 */
+            color: #991b1b; /* red-800 */
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        body.dark .form-message.success {
+            background-color: #14532d; /* dark green */
+            color: #a7f3d0; /* light green */
+        }
+
+        body.dark .form-message.error {
+            background-color: #7f1d1d; /* dark red */
+            color: #fca5a5; /* light red */
+        }
+
+        /* Back to Top Button */
+        #back-to-top-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 6.5rem; /* Adjusted to not overlap with dark mode toggle */
+            background-color: #0057FF;
+            color: white;
+            border-radius: 9999px;
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 99; /* Slightly lower than dark mode toggle */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #back-to-top-button.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top-button:hover {
+            background-color: #0043cc;
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Contact Form Visibility */
+        .contact-form-hidden {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out, transform 0.5s ease-out;
+        }
+
+        .contact-form-visible {
+            max-height: 1000px; /* A large enough value to accommodate the form */
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-sm shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold text-gray-900">Namani Prasad</a>
+            <nav class="hidden md:flex space-x-8">
+                <a href="#work" class="text-gray-700 font-medium nav-link-hover">Work</a>
+                <a href="#about" class="text-gray-700 font-medium nav-link-hover">About</a>
+                <a href="#contact" class="text-gray-700 font-medium nav-link-hover">Contact</a>
+            </nav>
+            <a href="#contact" class="hidden md:block bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent-dark transition-colors button-hover">
+                Get in Touch
+            </a>
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-gray-800">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                </svg>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white">
+            <a href="#work" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Work</a>
+            <a href="#about" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">About</a>
+            <a href="#contact" class="block text-center py-2 px-4 text-sm text-gray-600 hover:bg-gray-100">Contact</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-6 pt-24 md:pt-32">
+
+        <!-- Hero Section -->
+        <section class="py-20">
+            <div id="hero-card" class="bg-gray-100 modern-card fade-in-up p-8 text-center">
+                <h1 class="text-4xl md:text-6xl font-extrabold text-gray-900 leading-tight mb-4">
+                    FullStack Developer Building <br class="hidden md:block"> <span class="text-accent">Robust Web Applications</span>
+                </h1>
+                <p class="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto mb-8">
+                    I build and maintain scalable, efficient, and secure applications from the ground up, covering both front-end and back-end development.
+                </p>
+                <a href="#work" class="bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-dark transition-all transform button-hover">
+                    View My Work
+                </a>
+            </div>
+        </section>
+
+        <!-- Featured Work Section -->
+        <section id="work" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in-up text-accent">Featured Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+                
+                <!-- Project Card 1 -->
+                <div class="bg-gray-100 modern-card fade-in-up project-card" data-project-id="ecommerce">
+                    <img src="https://placehold.co/600x400/0057FF/FFFFFF?text=E-commerce+Platform" alt="E-commerce Platform Screenshot" class="w-full h-64 object-cover rounded-t-xl">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">E-commerce Platform</h3>
+                        <p class="text-gray-600 mb-4">Developed a full-stack e-commerce solution with a React frontend, Node.js/Express API, and MongoDB database.</p>
+                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 2 -->
+                <div class="bg-gray-100 modern-card fade-in-up project-card" style="transition-delay: 150ms;" data-project-id="dashboard">
+                    <img src="https://placehold.co/600x400/111111/FFFFFF?text=Project+Dashboard" alt="Project Dashboard Screenshot" class="w-full h-64 object-cover rounded-t-xl">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">Project Management Dashboard</h3>
+                        <p class="text-gray-600 mb-4">A real-time project management tool using Vue.js and Firebase, featuring collaborative task tracking.</p>
+                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 3 -->
+                <div class="bg-gray-100 modern-card fade-in-up project-card" style="transition-delay: 300ms;" data-project-id="restapi">
+                    <img src="https://placehold.co/600x400/EAEAEA/111111?text=RESTful+API" alt="RESTful API Screenshot" class="w-full h-64 object-cover rounded-t-xl">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">RESTful API Service</h3>
+                        <p class="text-gray-600 mb-4">Designed and deployed a secure and scalable RESTful API for a mobile application using Python, Flask, and PostgreSQL.</p>
+                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Project Card 4 -->
+                <div class="bg-gray-100 modern-card fade-in-up project-card" style="transition-delay: 450ms;" data-project-id="cicd">
+                    <img src="https://placehold.co/600x400/333333/FFFFFF?text=DevOps+Pipeline" alt="DevOps Pipeline Screenshot" class="w-full h-64 object-cover rounded-t-xl">
+                    <div class="p-8">
+                        <h3 class="text-2xl font-bold mb-2">CI/CD Pipeline Automation</h3>
+                        <p class="text-gray-600 mb-4">Implemented a complete CI/CD pipeline using Jenkins and Docker, automating testing and deployment.</p>
+                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20">
+            <div class="bg-gray-100 modern-card my-20 fade-in-up p-8 grid md:grid-cols-3 gap-10 items-center">
+                <div class="md:col-span-1">
+                    <img src="https://placehold.co/400x400/0057FF/FFFFFF?text=Your+Photo" alt="Professional headshot of Namani Prasad" class="rounded-full mx-auto w-48 h-48 md:w-full md:h-auto md:rounded-lg object-cover">
+                </div>
+                <div class="md:col-span-2 text-center md:text-left">
+                    <h2 class="text-3xl font-bold mb-4 text-accent">About Me</h2>
+                    <p class="text-gray-600 mb-6">
+                        I'm a FullStack Developer with a passion for building elegant solutions to complex problems. I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.
+                    </p>
+                    <div class="mb-6">
+                        <h4 class="font-bold mb-2">My Skills:</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <!-- Skill 1 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">JavaScript (ES6+)</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="90"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 2 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">React</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="85"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 3 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Node.js</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="80"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 4 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Express</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="75"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 5 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Python</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="70"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 6 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">SQL & NoSQL</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="80"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 7 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Docker</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="65"></div>
+                                </div>
+                            </div>
+                            <!-- Skill 8 -->
+                            <div>
+                                <p class="font-medium text-gray-800 dark:text-e2e8f0">REST APIs</p>
+                                <div class="skill-bar-container">
+                                    <div class="skill-bar-fill" data-skill-level="90"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="#" class="border border-accent text-accent px-8 py-3 rounded-lg font-semibold hover:bg-accent hover:text-white transition-colors button-hover">
+                        Download My Resume
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <div class="grid grid-cols-1 gap-10">
+                <div class="bg-gray-100 modern-card fade-in-up p-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-accent text-center">Have a project in mind?</h2>
+                    <p class="text-lg md:text-xl text-gray-600 max-w-2xl mx-auto mb-8 text-center">
+                        I'm currently available for freelance work and open to discussing new opportunities. Let's build something amazing together.
+                    </p>
+                    <div class="text-center mb-8">
+                        <button id="open-contact-form-button" class="bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-dark transition-all transform button-hover inline-block">
+                            Get in Touch
+                        </button>
+                    </div>
+                    <form id="contact-form" class="max-w-xl mx-auto space-y-4 contact-form-hidden">
+                        <div>
+                            <label for="name" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" placeholder="Your Name" required>
+                        </div>
+                        <div>
+                            <label for="email" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" placeholder="your@example.com" required>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" placeholder="Tell me about your project..." required></textarea>
+                        </div>
+                        <button type="submit" class="bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-dark transition-all transform button-hover w-full">
+                            Send Message
+                        </button>
+                        <div id="form-status-message" class="form-message hidden"></div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <div class="flex justify-center space-x-6 mb-4">
+                <!-- LinkedIn Icon -->
+                <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="LinkedIn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+                </a>
+                <!-- GitHub Icon -->
+                <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="GitHub">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                </a>
+                <!-- Twitter (X) Icon -->
+                <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Twitter">
+                   <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                </a>
+                <!-- Mail Icon -->
+                <a href="mailto:prasadnamani789@gmail.com" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Email">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.71a1.8 1.8 0 0 1-2.06 0L2 7"></path></svg>
+                </a>
+                <!-- Instagram Icon -->
+                <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Instagram">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
+                </a>
+                <!-- YouTube Icon -->
+                <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="YouTube">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6-1.58a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.58 8.6 1.58 8.6 1.58s6.88 0 8.6-1.58a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+                </a>
+                <!-- Personal Website/Blog Icon (retained) -->
+                 <a href="#" class="text-gray-400 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Personal Website or Blog">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
+                </a>
+            </div>
+            <p class="text-gray-500 text-sm">&copy; 2025 Namani Prasad. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Dark Mode Toggle Button -->
+    <button id="dark-mode-toggle">
+        <!-- Sun Icon (Light Mode) -->
+        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <!-- Moon Icon (Dark Mode) -->
+        <svg id="moon-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top-button" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+    </button>
+
+    <!-- Project Modal Structure -->
+    <div id="project-modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close-button" id="close-modal-button">&times;</button>
+            <img id="modal-project-image" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mb-4">
+            <h2 id="modal-project-title" class="text-3xl font-bold mb-2 text-gray-900 dark:text-e2e8f0"></h2>
+            <p id="modal-project-description" class="text-gray-700 dark:text-cbd5e0 mb-4"></p>
+            <div id="modal-project-tech" class="flex flex-wrap gap-2 mb-4">
+                <!-- Technologies will be dynamically inserted here -->
+            </div>
+            <div class="flex gap-4">
+                <a id="modal-project-github" href="#" target="_blank" class="bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-dark transition-colors button-hover">
+                    View on GitHub
+                </a>
+                <a id="modal-project-live" href="#" target="_blank" class="border border-accent text-accent px-6 py-3 rounded-lg font-semibold hover:bg-accent hover:text-white transition-colors button-hover">
+                    Live Demo
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // JavaScript for Mobile Menu
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // JavaScript for Fade-in-up animation on scroll
+        const faders = document.querySelectorAll('.fade-in-up');
+        const appearOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const appearOnScroll = new IntersectionObserver(function(entries, appearOnScroll) {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) {
+                    return;
+                } else {
+                    entry.target.classList.add('visible');
+                    appearOnScroll.unobserve(entry.target);
+                }
+            });
+        }, appearOptions);
+
+        faders.forEach(fader => {
+            appearOnScroll.observe(fader);
+        });
+
+        // Dark Mode Logic
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        const body = document.body;
+
+        // Function to set the theme
+        function setTheme(isDarkMode) {
+            if (isDarkMode) {
+                body.classList.add('dark');
+                sunIcon.classList.remove('hidden');
+                moonIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'dark');
+            } else {
+                body.classList.remove('dark');
+                moonIcon.classList.remove('hidden');
+                sunIcon.classList.add('hidden');
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Check for saved theme preference or system preference on load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            setTheme(savedTheme === 'dark');
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            // If no saved theme, check system preference
+            setTheme(true);
+        } else {
+            setTheme(false); // Default to light mode
+        }
+
+        // Toggle theme on button click
+        darkModeToggle.addEventListener('click', () => {
+            setTheme(!body.classList.contains('dark'));
+        });
+
+        // Project Modal Logic
+        const projectModalOverlay = document.getElementById('project-modal-overlay');
+        const closeModalButton = document.getElementById('close-modal-button');
+        const modalProjectImage = document.getElementById('modal-project-image');
+        const modalProjectTitle = document.getElementById('modal-project-title');
+        const modalProjectDescription = document.getElementById('modal-project-description');
+        const modalProjectTech = document.getElementById('modal-project-tech');
+        const modalProjectGithub = document.getElementById('modal-project-github');
+        const modalProjectLive = document.getElementById('modal-project-live');
+
+        // Sample project data (replace with real data)
+        const projects = {
+            ecommerce: {
+                title: "E-commerce Platform",
+                description: "A comprehensive full-stack e-commerce solution built with React for the frontend, Node.js/Express for the API, and MongoDB for the database. Features include user authentication, product catalog, shopping cart, checkout process, and order management. Designed for scalability and a seamless user experience.",
+                image: "https://placehold.co/600x400/0057FF/FFFFFF?text=E-commerce+Platform",
+                technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Stripe API"],
+                github: "#",
+                live: "#"
+            },
+            dashboard: {
+                title: "Project Management Dashboard",
+                description: "A real-time, collaborative project management tool developed using Vue.js for the frontend and Firebase for backend services (Firestore, Authentication). Key features include task assignment, progress tracking, user roles, and real-time updates across multiple users. Ideal for small to medium teams.",
+                image: "https://placehold.co/600x400/111111/FFFFFF?text=Project+Dashboard",
+                technologies: ["Vue.js", "Firebase (Firestore, Auth)", "Vuex", "Chart.js"],
+                github: "#",
+                live: "#"
+            },
+            restapi: {
+                title: "RESTful API Service",
+                description: "Designed and deployed a robust and secure RESTful API for a mobile application. Built with Python and Flask, utilizing PostgreSQL as the database. Implemented features like user management, data validation, token-based authentication, and comprehensive error handling. Documented with Swagger/OpenAPI.",
+                image: "https://placehold.co/600x400/EAEAEA/111111?text=RESTful+API",
+                technologies: ["Python", "Flask", "PostgreSQL", "SQLAlchemy", "JWT", "Docker"],
+                github: "#",
+                live: "#"
+            },
+            cicd: {
+                title: "CI/CD Pipeline Automation",
+                description: "Automated a complete Continuous Integration and Continuous Delivery (CI/CD) pipeline for a web application. Utilized Jenkins for orchestration, Docker for containerization, and integrated with Git for version control. This pipeline significantly reduced deployment time and improved code quality through automated testing and deployment stages.",
+                image: "https://placehold.co/600x400/333333/FFFFFF?text=DevOps+Pipeline",
+                technologies: ["Jenkins", "Docker", "Git", "Bash Scripting", "AWS (S3, EC2)"],
+                github: "#",
+                live: "#"
+            }
+        };
+
+        // Function to open the modal
+        function openProjectModal(projectId) {
+            const project = projects[projectId];
+            if (project) {
+                modalProjectImage.src = project.image;
+                modalProjectTitle.textContent = project.title;
+                modalProjectDescription.textContent = project.description;
+                
+                // Clear previous technologies
+                modalProjectTech.innerHTML = '';
+                project.technologies.forEach(tech => {
+                    const span = document.createElement('span');
+                    span.className = 'bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm dark:bg-gray-700 dark:text-gray-200';
+                    span.textContent = tech;
+                    modalProjectTech.appendChild(span);
+                });
+
+                modalProjectGithub.href = project.github;
+                modalProjectLive.href = project.live;
+
+                projectModalOverlay.classList.add('open');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling background
+            }
+        }
+
+        // Function to close the modal
+        function closeProjectModal() {
+            projectModalOverlay.classList.remove('open');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Event listeners for project cards
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('click', (event) => {
+                // Ensure clicking the GitHub link inside the card doesn't open the modal
+                if (event.target.tagName === 'A' || event.target.closest('a')) {
+                    return; 
+                }
+                const projectId = card.dataset.projectId;
+                openProjectModal(projectId);
+            });
+        });
+
+        // Event listener for close button
+        closeModalButton.addEventListener('click', closeProjectModal);
+
+        // Close modal when clicking outside the content
+        projectModalOverlay.addEventListener('click', (event) => {
+            if (event.target === projectModalOverlay) {
+                closeProjectModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && projectModalOverlay.classList.contains('open')) {
+                closeProjectModal();
+            }
+        });
+
+        // Skill Bar Animation Logic
+        const skillBars = document.querySelectorAll('.skill-bar-fill');
+        const aboutSection = document.getElementById('about');
+
+        const skillBarObserver = new IntersectionObserver(function(entries, observer) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    skillBars.forEach(bar => {
+                        const level = bar.dataset.skillLevel;
+                        bar.style.width = `${level}%`;
+                    });
+                    observer.unobserve(aboutSection); // Stop observing once animated
+                }
+            });
+        }, { threshold: 0.5 }); // Trigger when 50% of the about section is visible
+
+        skillBarObserver.observe(aboutSection);
+
+        // Contact Form Submission Logic
+        const contactForm = document.getElementById('contact-form');
+        const formStatusMessage = document.getElementById('form-status-message');
+        const openContactFormButton = document.getElementById('open-contact-form-button');
+
+        // Function to toggle contact form visibility
+        function toggleContactForm() {
+            contactForm.classList.toggle('contact-form-hidden');
+            contactForm.classList.toggle('contact-form-visible');
+            // Scroll to the form if it becomes visible
+            if (contactForm.classList.contains('contact-form-visible')) {
+                contactForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+
+        // Event listener for the new "Get in Touch" button
+        openContactFormButton.addEventListener('click', toggleContactForm);
+
+        contactForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Simulate form submission
+            formStatusMessage.classList.remove('hidden', 'success', 'error');
+            formStatusMessage.textContent = 'Sending message...';
+            formStatusMessage.style.opacity = '1';
+            formStatusMessage.style.transform = 'translateY(0)';
+
+            setTimeout(() => {
+                // In a real application, you would send data to a backend here
+                // For this example, we'll just simulate success
+                const isSuccess = Math.random() > 0.1; // 90% chance of success
+
+                if (isSuccess) {
+                    formStatusMessage.textContent = 'Message sent successfully! I will get back to you soon.';
+                    formStatusMessage.classList.add('success');
+                    contactForm.reset(); // Clear the form
+                    // Optionally hide the form again after success
+                    setTimeout(() => {
+                        toggleContactForm(); // Hide form after successful submission
+                    }, 2000); // Hide after 2 seconds
+                } else {
+                    formStatusMessage.textContent = 'Oops! Something went wrong. Please try again later.';
+                    formStatusMessage.classList.add('error');
+                }
+
+                // Hide message after a few seconds
+                setTimeout(() => {
+                    formStatusMessage.style.opacity = '0';
+                    formStatusMessage.style.transform = 'translateY(10px)';
+                    setTimeout(() => {
+                        formStatusMessage.classList.add('hidden');
+                    }, 300); // Wait for transition to finish
+                }, 5000); // Message visible for 5 seconds
+
+            }, 1500); // Simulate network delay
+        });
+
+        // Back to Top Button Logic
+        const backToTopButton = document.getElementById('back-to-top-button');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) { // Show button after scrolling 300px
+                backToTopButton.classList.add('show');
+            } else {
+                backToTopButton.classList.remove('show');
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Smooth scroll to top
+            });
+        });
+    </script>
+
+</body>
+</html>
