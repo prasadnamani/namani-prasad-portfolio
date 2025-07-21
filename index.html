@@ -424,7 +424,7 @@
             60% {
                 text-shadow:
                     .25em 0 0 white,
-                    .5em 0 0 rgba(0,0,0,0);
+                    .5em 0 0 white;
             }
             80%, 100% {
                 text-shadow:
@@ -434,6 +434,110 @@
         }
         body.dark .loading-dots {
             color: white; /* Ensure dots are visible in dark mode */
+        }
+
+        /* Chatbot specific styles */
+        #chatbot-container {
+            background-color: #2d3748; /* Dark background for chatbot */
+            border-radius: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            max-width: 600px;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        #chat-messages {
+            flex-grow: 1;
+            padding: 1rem;
+            overflow-y: auto;
+            max-height: 400px; /* Limit chat height */
+            background-color: #1a202c; /* Even darker background for messages */
+            border-bottom: 1px solid #4a5568;
+        }
+
+        .chat-message {
+            margin-bottom: 0.75rem;
+            display: flex;
+        }
+
+        .chat-message.user .message-bubble {
+            background-color: #0057FF; /* Accent blue for user */
+            color: white;
+            margin-left: auto;
+            border-bottom-right-radius: 0;
+            border-top-left-radius: 0.75rem;
+            border-bottom-left-radius: 0.75rem;
+        }
+
+        .chat-message.bot .message-bubble {
+            background-color: #4a5568; /* Gray for bot */
+            color: #e2e8f0;
+            margin-right: auto;
+            border-bottom-left-radius: 0;
+            border-top-right-radius: 0.75rem;
+            border-bottom-right-radius: 0.75rem;
+        }
+
+        .message-bubble {
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            max-width: 80%;
+        }
+
+        #chat-input-container {
+            padding: 1rem;
+            display: flex;
+            gap: 0.5rem;
+            background-color: #2d3748;
+        }
+
+        #chat-input {
+            flex-grow: 1;
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            background-color: #4a5568;
+            color: #e2e8f0;
+            border: 1px solid #6b7280;
+            focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+        }
+        #chat-input::placeholder {
+            color: #a0aec0;
+        }
+
+        #send-chat-button {
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        /* Clearer text boxes */
+        textarea, input[type="text"], input[type="email"], input[type="file"] {
+            background-color: #f8fafc; /* light-gray-50 */
+            border: 1px solid #cbd5e0; /* light-gray-300 */
+            color: #1a202c; /* dark-gray-900 */
+            padding: 0.75rem 1rem;
+            border-radius: 0.5rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        textarea:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus {
+            border-color: #0057FF;
+            box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.2);
+            outline: none;
+        }
+
+        body.dark textarea, body.dark input[type="text"], body.dark input[type="email"], body.dark input[type="file"] {
+            background-color: #4a5568; /* dark-gray-700 */
+            border-color: #6b7280; /* dark-gray-600 */
+            color: #e2e8f0; /* light-gray-200 */
+        }
+
+        body.dark textarea::placeholder, body.dark input::placeholder {
+            color: #a0aec0; /* light-gray-400 */
         }
     </style>
 </head>
@@ -456,9 +560,9 @@
                 <span>Namani Prasad</span>
             </a>
             <nav class="hidden md:flex space-x-8">
-                <a href="#ai-showcase-section" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">AI Showcase</a>
                 <a href="#ai-features-section" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">AI Features</a>
-                <a href="#work" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">Work</a>
+                <a href="#chatbot-section" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">AI Chatbot</a>
+                <a href="#my-projects" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">My Projects</a>
                 <a href="#about" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">About</a>
                 <a href="#contact" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">Contact</a>
             </nav>
@@ -474,13 +578,19 @@
         </div>
         <!-- Mobile Menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-blue-100 dark:bg-gray-800">
-            <a href="#ai-showcase-section" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">AI Showcase</a>
             <a href="#ai-features-section" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">AI Features</a>
-            <a href="#work" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">Work</a>
+            <a href="#chatbot-section" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">AI Chatbot</a>
+            <a href="#my-projects" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">My Projects</a>
             <a href="#about" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">About</a>
             <a href="#contact" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">Contact</a>
         </div>
     </header>
+
+    <!-- Beta Message Banner -->
+    <div id="beta-message-banner" class="bg-yellow-400 text-yellow-900 p-3 text-center text-sm font-medium flex items-center justify-center gap-4 sticky top-0 z-50">
+        <span>This website is currently in Beta. Some AI features are interactive demos and may have limited functionality. Full features will be available soon!</span>
+        <button id="close-beta-message" class="text-yellow-900 hover:text-red-700 font-bold text-lg leading-none">&times;</button>
+    </div>
 
     <main class="container mx-auto px-6 pt-24 md:pt-32">
 
@@ -562,10 +672,26 @@
             </div>
         </section>
 
+        <!-- AI Chatbot Section -->
+        <section id="chatbot-section" class="py-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-accent text-center fade-in-up">AI Digital Assistant</h2>
+            <div id="chatbot-container" class="fade-in-up">
+                <div id="chat-messages" class="flex flex-col space-y-4">
+                    <!-- Chat messages will be appended here -->
+                    <div class="chat-message bot">
+                        <div class="message-bubble">Hello! I'm Namani Prasad's AI assistant. How can I help you today?</div>
+                    </div>
+                </div>
+                <div id="chat-input-container">
+                    <input type="text" id="chat-input" placeholder="Ask me anything about Namani Prasad..." class="flex-grow">
+                    <button id="send-chat-button" class="gradient-button text-white button-hover">Send</button>
+                </div>
+            </div>
+        </section>
 
-        <!-- Featured Work Section -->
-        <section id="work" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12 fade-in-up text-accent">Featured Projects</h2>
+        <!-- My Projects Section -->
+        <section id="my-projects" class="py-20">
+            <h2 class="text-3xl font-bold text-center mb-12 fade-in-up text-accent">My Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 
                 <!-- Project Card 1 -->
@@ -620,8 +746,18 @@
                 <div class="md:col-span-2 text-center md:text-left">
                     <h2 class="text-3xl font-bold mb-4 text-accent">About Me</h2>
                     <p class="text-gray-600 dark:text-a0aec0 mb-6">
-                        I'm a FullStack Developer with a passion for building elegant solutions to complex problems. I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.
+                        <span id="about-me-intro">I'm a FullStack Developer with a passion for building elegant solutions to complex problems.</span>
+                        <span id="about-me-personalized-content"> I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.</span>
                     </p>
+                    <div class="flex justify-center md:justify-start gap-4 mb-6">
+                        <label for="about-me-interest" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Personalize for:</label>
+                        <select id="about-me-interest" class="p-2 rounded-lg bg-white text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
+                            <option value="default">General</option>
+                            <option value="tech-recruiter">Tech Recruiter</option>
+                            <option value="startup-founder">Startup Founder</option>
+                            <option value="data-scientist">Fellow Data Scientist</option>
+                        </select>
+                    </div>
                     <div class="mb-6">
                         <h4 class="font-bold mb-2 text-gray-800 dark:text-e2e8f0">My Skills:</h4>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -896,14 +1032,15 @@
         const modalProjectLive = document.getElementById('modal-project-live');
 
         // Sample project data (replace with real data)
-        const projects = {
+        const allProjects = {
             ecommerce: {
                 title: "E-commerce Platform",
                 description: "A comprehensive full-stack e-commerce solution built with React for the frontend, Node.js/Express for the API, and MongoDB for the database. Features include user authentication, product catalog, shopping cart, checkout process, and order management. Designed for scalability and a seamless user experience.",
                 image: "https://placehold.co/600x400/0057FF/FFFFFF?text=E-commerce+Platform",
                 technologies: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Stripe API"],
                 github: "#",
-                live: "#"
+                live: "#",
+                category: "web-dev"
             },
             dashboard: {
                 title: "Project Management Dashboard",
@@ -911,7 +1048,8 @@
                 image: "https://placehold.co/600x400/111111/FFFFFF?text=Project+Dashboard",
                 technologies: ["Vue.js", "Firebase (Firestore, Auth)", "Vuex", "Chart.js"],
                 github: "#",
-                live: "#"
+                live: "#",
+                category: "web-dev"
             },
             restapi: {
                 title: "RESTful API Service",
@@ -919,7 +1057,8 @@
                 image: "https://placehold.co/600x400/EAEAEA/111111?text=RESTful+API",
                 technologies: ["Python", "Flask", "PostgreSQL", "SQLAlchemy", "JWT", "Docker"],
                 github: "#",
-                live: "#"
+                live: "#",
+                category: "data-ai" // Changed category
             },
             cicd: {
                 title: "CI/CD Pipeline Automation",
@@ -927,13 +1066,32 @@
                 image: "https://placehold.co/600x400/333333/FFFFFF?text=DevOps+Pipeline",
                 technologies: ["Jenkins", "Docker", "Git", "Bash Scripting", "AWS (S3, EC2)"],
                 github: "#",
-                live: "#"
+                live: "#",
+                category: "devops"
+            },
+            nlp_app: {
+                title: "Natural Language Processing App",
+                description: "Developed an NLP application for sentiment analysis and text summarization using Python and Hugging Face transformers. Features a web interface for users to input text and receive insights.",
+                image: "https://placehold.co/600x400/FF5733/FFFFFF?text=NLP+App",
+                technologies: ["Python", "Flask", "Hugging Face", "NLTK", "SpaCy"],
+                github: "#",
+                live: "#",
+                category: "data-ai"
+            },
+            cloud_infra: {
+                title: "Automated Cloud Infrastructure",
+                description: "Designed and implemented automated cloud infrastructure provisioning using Terraform and AWS. Ensured scalable, secure, and cost-effective deployment of web services.",
+                image: "https://placehold.co/600x400/33FF57/FFFFFF?text=Cloud+Infra",
+                technologies: ["Terraform", "AWS", "Ansible", "Kubernetes"],
+                github: "#",
+                live: "#",
+                category: "devops"
             }
         };
 
         // Function to open the modal
         function openProjectModal(projectId) {
-            const project = projects[projectId];
+            const project = allProjects[projectId];
             if (project) {
                 modalProjectImage.src = project.image;
                 modalProjectTitle.textContent = project.title;
@@ -1175,16 +1333,6 @@
             }
         }
 
-        // Parallax effect (adjust content position based on scroll) - Removed for fixed canvas
-        /*
-        function applyParallax() {
-            const scrollY = window.scrollY;
-            const parallaxFactor = 0.3; // Adjust this for stronger/weaker effect
-            const offset = scrollY * parallaxFactor;
-            canvas.style.transform = `translateY(${offset}px)`;
-        }
-        */
-
         // Animation loop
         function animateCanvas() {
             updateParticles();
@@ -1210,7 +1358,6 @@
             animateCanvas();
         });
         window.addEventListener('resize', resizeCanvas);
-        // window.addEventListener('scroll', applyParallax); // Removed
 
         // Logic for "Explore AI Features" button
         const exploreAiFeaturesButton = document.getElementById('explore-ai-features-button');
@@ -1414,6 +1561,112 @@
                 }
             };
             reader.readAsDataURL(file); // Read the image file as a Data URL
+        });
+
+        // AI Chatbot Logic
+        const chatMessages = document.getElementById('chat-messages');
+        const chatInput = document.getElementById('chat-input');
+        const sendChatButton = document.getElementById('send-chat-button');
+
+        const chatbotKnowledge = {
+            "hello": "Hello there! How can I assist you today regarding Namani Prasad's portfolio?",
+            "hi": "Hi! What would you like to know about Namani Prasad?",
+            "what do you do": "Namani Prasad is a FullStack Developer with expertise in building dynamic web applications, AI/ML solutions, and robust backend systems.",
+            "what technologies do you use": "Namani Prasad uses a wide range of technologies including React, Node.js, Python, Express, MongoDB, PostgreSQL, Docker, and various AI/ML frameworks.",
+            "tell me about your experience": "Namani Prasad has experience in developing full-stack applications, designing RESTful APIs, implementing CI/CD pipelines, and creating interactive AI/ML demos.",
+            "can you generate an image": "Yes, I can! Please navigate to the 'AI Image Generator' section to try it out. Describe the image you want, and the AI will create it.",
+            "can you describe an image": "Absolutely! Go to the 'AI Image Comprehension' section. You can upload an image there, and I'll tell you what the AI sees.",
+            "how can i contact namani": "You can reach Namani Prasad through the contact form at the bottom of this page, or connect on LinkedIn and GitHub. The links are in the footer!",
+            "what are your skills": "Namani Prasad's key skills include JavaScript (ES6+), React, Node.js, Express, Python, SQL & NoSQL databases, Docker, and REST API development.",
+            "thank you": "You're welcome! Is there anything else I can help you with?",
+            "bye": "Goodbye! Feel free to return if you have more questions."
+        };
+
+        function addMessage(sender, text) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('chat-message', sender);
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.classList.add('message-bubble');
+            bubbleDiv.textContent = text;
+            messageDiv.appendChild(bubbleDiv);
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight; // Scroll to bottom
+        }
+
+        async function sendChatMessage() {
+            const userMessage = chatInput.value.trim();
+            if (userMessage === "") return;
+
+            addMessage('user', userMessage);
+            chatInput.value = ''; // Clear input
+
+            // Simulate bot typing/thinking
+            const botThinkingMessage = document.createElement('div');
+            botThinkingMessage.classList.add('chat-message', 'bot');
+            const thinkingBubble = document.createElement('div');
+            thinkingBubble.classList.add('message-bubble');
+            thinkingBubble.innerHTML = '<div class="loading-dots">Typing</div>'; // Simple typing indicator
+            botThinkingMessage.appendChild(thinkingBubble);
+            chatMessages.appendChild(botThinkingMessage);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+
+            // Simple keyword-based response for demonstration
+            const lowerCaseMessage = userMessage.toLowerCase();
+            let botResponse = "I'm sorry, I don't have information on that specific topic. Please try asking something else about Namani Prasad's skills or projects.";
+
+            for (const key in chatbotKnowledge) {
+                if (lowerCaseMessage.includes(key)) {
+                    botResponse = chatbotKnowledge[key];
+                    break;
+                }
+            }
+
+            // Simulate API call delay
+            await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000)); // 1-2 second delay
+
+            chatMessages.removeChild(botThinkingMessage); // Remove typing indicator
+            addMessage('bot', botResponse);
+        }
+
+        sendChatButton.addEventListener('click', sendChatMessage);
+        chatInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendChatMessage();
+            }
+        });
+
+        // AI-driven Content Personalization for 'About Me'
+        const aboutMeInterestSelector = document.getElementById('about-me-interest');
+        const aboutMePersonalizedContent = document.getElementById('about-me-personalized-content');
+
+        const aboutMeContent = {
+            default: "I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.",
+            "tech-recruiter": "I specialize in building scalable and efficient web applications, with a strong focus on modern frameworks and robust backend systems. My experience spans the full software development lifecycle, from concept to deployment.",
+            "startup-founder": "I'm passionate about bringing innovative ideas to life through technology. I thrive in fast-paced environments and am skilled at rapidly prototyping and iterating on products to achieve market fit. My expertise allows me to build robust MVPs and scale them effectively.",
+            "data-scientist": "My background includes a strong foundation in data analysis, machine learning, and AI model deployment. I'm adept at leveraging data to drive insights and build intelligent features into applications, from predictive analytics to natural language processing."
+        };
+
+        function updateAboutMeContent() {
+            const selectedInterest = aboutMeInterestSelector.value;
+            aboutMePersonalizedContent.textContent = aboutMeContent[selectedInterest];
+        }
+
+        aboutMeInterestSelector.addEventListener('change', updateAboutMeContent);
+        // Initial update
+        updateAboutMeContent();
+
+        // Beta Message Logic
+        const betaMessageBanner = document.getElementById('beta-message-banner');
+        const closeBetaMessageButton = document.getElementById('close-beta-message');
+
+        // Check localStorage for dismissal on load
+        if (localStorage.getItem('betaMessageDismissed') === 'true') {
+            betaMessageBanner.classList.add('hidden');
+        }
+
+        closeBetaMessageButton.addEventListener('click', () => {
+            betaMessageBanner.classList.add('hidden');
+            localStorage.setItem('betaMessageDismissed', 'true'); // Remember dismissal
         });
     </script>
 
