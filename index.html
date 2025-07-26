@@ -3,68 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Namani Prasad | FullStack Developer</title>
+    <title>Namani Prasad | Futuristic Portfolio</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Google Fonts: Inter -->
+    <!-- Google Fonts: Inter for high-tech typography -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;800&display=swap" rel="stylesheet">
     
     <!-- Custom Styles & Configuration for Tailwind -->
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for theme change */
-        }
-        /* Custom accent color */
-        .bg-accent { background-color: #0057FF; }
-        .text-accent { color: #0057FF; }
-        .border-accent { border-color: #0057FF; }
-        .hover\:bg-accent-dark:hover { background-color: #0043cc; }
-
-        /* Dark mode specific styles */
-        body.dark {
-            background-color: #1a202c; /* Dark background */
-            color: #e2e8f0; /* Light text */
+            background: radial-gradient(circle at center, #0a0a0a, #000000); /* Soft dark background */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start; /* Align content to top initially */
+            align-items: center;
+            overflow-x: hidden; /* Prevent horizontal scroll */
+            color: #e0e0e0; /* Light grey text for contrast */
         }
 
-        body.dark .text-gray-900 {
-            color: #e2e8f0; /* Adjust dark mode text for headings */
+        /* Glassmorphism effect */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.05); /* Very subtle white background */
+            backdrop-filter: blur(15px); /* Stronger blur for glass effect */
+            -webkit-backdrop-filter: blur(15px); /* Safari support */
+            border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle border */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37); /* Soft shadow */
+            border-radius: 15px;
+            transition: all 0.3s ease-in-out;
         }
 
-        body.dark .text-gray-800 {
-            color: #e2e8f0; /* Adjust dark mode text for general content */
+        .glass-panel:hover {
+            background: rgba(255, 255, 255, 0.08); /* Slightly more opaque on hover */
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transform: translateY(-5px); /* Slight lift on hover */
         }
 
-        body.dark .text-gray-700 {
-            color: #cbd5e0; /* Adjust dark mode text for navigation */
+        /* Neon glow effect for text and elements */
+        .neon-glow-blue {
+            text-shadow: 0 0 5px #3b82f6, 0 0 10px #3b82f6, 0 0 15px #3b82f6, 0 0 20px #3b82f6;
+            color: #60a5fa; /* Lighter blue for the base text */
         }
 
-        body.dark .text-gray-600 {
-            color: #a0aec0; /* Adjust dark mode text for paragraphs */
+        .neon-glow-purple {
+            text-shadow: 0 0 5px #8b5cf6, 0 0 10px #8b5cf6, 0 0 15px #8b5cf6, 0 0 20px #8b5cf6;
+            color: #a78bfa; /* Lighter purple for the base text */
         }
 
-        body.dark .bg-white {
-            background-color: #2d3748; /* Darker background for header/mobile menu */
+        /* Holographic effect for icons/elements */
+        .holographic-icon {
+            filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.7)) drop-shadow(0 0 10px rgba(139, 92, 246, 0.7));
+            animation: pulse-glow 2s infinite alternate;
         }
 
-        body.dark .shadow-sm {
-            box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5); /* Darker shadow for dark mode */
+        @keyframes pulse-glow {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+                filter: drop-shadow(0 0 5px rgba(59, 130, 246, 0.5)) drop-shadow(0 0 10px rgba(139, 92, 246, 0.5));
+            }
+            100% {
+                transform: scale(1.05);
+                opacity: 1;
+                filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.9)) drop-shadow(0 0 15px rgba(139, 92, 246, 0.9));
+            }
         }
 
-        /* Updated card backgrounds */
-        .bg-card-light { background-color: #F0F9FF; /* Tailwind blue-50 */ }
-        .bg-card-dark { background-color: #364756; /* Darker blue-gray for dark mode cards */ }
-
-        body.dark .bg-gray-100 { /* This rule targets elements with bg-gray-100 in dark mode */
-            background-color: #2d3748; /* Dark background for cards */
+        /* Floating animation for elements */
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
-        body.dark .bg-gray-200 {
-            background-color: #4a5568; /* Darker background for skill tags */
-            color: #e2e8f0;
+
+        .floating-element {
+            animation: float 4s ease-in-out infinite;
+        }
+
+        /* 3D button effect */
+        .button-3d {
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6); /* Purple to blue gradient */
+            box-shadow: 0 5px 15px rgba(79, 70, 229, 0.4), 0 2px 5px rgba(139, 92, 246, 0.6);
+            transition: all 0.2s ease-in-out;
+            transform-style: preserve-3d; /* Enable 3D transforms for children */
+            position: relative;
+            overflow: hidden; /* Hide overflow for gradient */
+        }
+
+        .button-3d:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px 8px rgba(79, 70, 229, 0.3);
+        }
+
+        /* This pseudo-element creates a subtle 3D depth effect */
+        .button-3d::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #6366f1, #a78bfa); /* Lighter gradient for top surface */
+            transform: translateZ(-1px); /* Push slightly back in 3D space */
+            border-radius: inherit;
+            opacity: 0.8;
+            z-index: -1;
+        }
+
+        /* Header specific styling */
+        .header-bg {
+            background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        /* Main content padding to account for fixed header */
+        .main-content-padding {
+            padding-top: 6rem; /* Adjust based on header height */
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .main-content-padding {
+                padding-top: 5rem;
+            }
+            .header-bg {
+                background-color: rgba(0, 0, 0, 0.8); /* More opaque on mobile */
+            }
+            .glass-panel {
+                margin-bottom: 1rem;
+            }
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+            .hero-section p {
+                font-size: 1rem;
+            }
+        }
+
+        /* AI Canvas (fixed to background) */
+        #futuristic-canvas {
+            position: fixed; /* Changed to fixed to cover entire viewport */
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Behind all content */
+        }
+
+        /* Back to Top Button */
+        #back-to-top-button {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem; /* Adjusted position since dark mode toggle is removed */
+            background-color: #4f46e5;
+            color: white;
+            border-radius: 9999px;
+            padding: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15);
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 99;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #back-to-top-button.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #back-to-top-button:hover {
+            background-color: #6d28d9;
+            transform: scale(1.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Updated card backgrounds for futuristic theme */
+        .bg-card-light { 
+            background: rgba(255, 255, 255, 0.05); /* Glassmorphism light */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .bg-card-dark { 
+            background: rgba(0, 0, 0, 0.2); /* Darker glassmorphism for dark mode cards */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         /* Simple animation for elements appearing on scroll */
@@ -87,11 +221,11 @@
         .nav-link-hover:hover {
             transform: scale(1.05);
             color: white; /* Text color changes to white on hover */
-            background-color: #0043cc; /* Background color similar to button hover */
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6); /* Neon gradient on hover */
         }
         .button-hover:hover {
             transform: scale(1.05);
-            box-shadow: 0 10px 15px -3px rgba(0, 87, 255, 0.3), 0 4px 6px -2px rgba(0, 87, 255, 0.15); /* Subtle shadow on hover */
+            box-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.4), 0 4px 6px -2px rgba(139, 92, 246, 0.6); /* Subtle shadow on hover */
         }
 
         /* Card specific styles for a more modern look */
@@ -106,43 +240,6 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.15), 0 10px 10px -5px rgba(0, 0, 0, 0.08); /* Stronger shadow on hover */
         }
 
-        body.dark .modern-card {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -2px rgba(0, 0, 0, 0.15); /* Darker default shadow */
-        }
-
-        body.dark .modern-card:hover {
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2); /* Even darker hover shadow */
-        }
-
-        /* Floating Dark Mode Button */
-        #dark-mode-toggle {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            background-color: #0057FF;
-            color: white;
-            border-radius: 9999px; /* Fully rounded */
-            padding: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
-            z-index: 100;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #dark-mode-toggle:hover {
-            background-color: #0043cc;
-            transform: scale(1.1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
-        }
-
-        #dark-mode-toggle svg {
-            width: 24px;
-            height: 24px;
-        }
-
         /* Project Modal Styles */
         .modal-overlay {
             position: fixed;
@@ -150,7 +247,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-color: rgba(0, 0, 0, 0.7);
+            background-color: rgba(0, 0, 0, 0.8); /* Darker overlay */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -166,7 +263,10 @@
         }
 
         .modal-content {
-            background-color: white;
+            background: rgba(255, 255, 255, 0.08); /* Glassmorphism for modal */
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 2rem;
             border-radius: 1rem;
             max-width: 800px;
@@ -177,16 +277,13 @@
             opacity: 0;
             transition: transform 0.3s ease, opacity 0.3s ease;
             position: relative;
+            color: #e0e0e0; /* Light text */
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
         }
 
         .modal-overlay.open .modal-content {
             transform: translateY(0);
             opacity: 1;
-        }
-
-        body.dark .modal-content {
-            background-color: #2d3748;
-            color: #e2e8f0;
         }
 
         .modal-close-button {
@@ -195,34 +292,27 @@
             right: 1rem;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.8rem; /* Larger close button */
             cursor: pointer;
-            color: #6b7280;
-            transition: color 0.2s ease;
+            color: #a0aec0; /* Light gray */
+            transition: color 0.2s ease, transform 0.2s ease;
         }
 
         .modal-close-button:hover {
-            color: #1a202c;
-        }
-        body.dark .modal-close-button:hover {
-            color: #e2e8f0;
+            color: #e2e8f0; /* Whiter on hover */
+            transform: rotate(90deg); /* Spin effect */
         }
 
-        /* Skill Bar Styles */
+        /* Skill Bar Styles - Removed, keeping only for reference if needed for other elements */
         .skill-bar-container {
-            background-color: #e2e8f0;
+            background-color: rgba(255, 255, 255, 0.1); /* Subtle background for bar */
             border-radius: 0.5rem;
             height: 1rem;
             overflow: hidden;
             margin-top: 0.5rem;
         }
-
-        body.dark .skill-bar-container {
-            background-color: #4a5568;
-        }
-
         .skill-bar-fill {
-            background-color: #0057FF;
+            background: linear-gradient(90deg, #4f46e5, #8b5cf6); /* Neon gradient fill */
             height: 100%;
             width: 0%; /* Initial width for animation */
             border-radius: 0.5rem;
@@ -242,58 +332,17 @@
         }
 
         .form-message.success {
-            background-color: #d1fae5; /* green-100 */
-            color: #065f46; /* green-800 */
+            background-color: rgba(16, 185, 129, 0.2); /* green-500 with transparency */
+            color: #34d399; /* green-400 */
             opacity: 1;
             transform: translateY(0);
         }
 
         .form-message.error {
-            background-color: #fee2e2; /* red-100 */
-            color: #991b1b; /* red-800 */
+            background-color: rgba(239, 68, 68, 0.2); /* red-500 with transparency */
+            color: #ef4444; /* red-500 */
             opacity: 1;
             transform: translateY(0);
-        }
-
-        body.dark .form-message.success {
-            background-color: #14532d; /* dark green */
-            color: #a7f3d0; /* light green */
-        }
-
-        body.dark .form-message.error {
-            background-color: #7f1d1d; /* dark red */
-            color: #fca5a5; /* light red */
-        }
-
-        /* Back to Top Button */
-        #back-to-top-button {
-            position: fixed;
-            bottom: 2rem;
-            right: 6.5rem; /* Adjusted to not overlap with dark mode toggle */
-            background-color: #0057FF;
-            color: white;
-            border-radius: 9999px;
-            padding: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease, opacity 0.3s ease, visibility 0.3s ease;
-            z-index: 99; /* Slightly lower than dark mode toggle */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            visibility: hidden;
-        }
-
-        #back-to-top-button.show {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        #back-to-top-button:hover {
-            background-color: #0043cc;
-            transform: scale(1.1);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.08);
         }
 
         /* Contact Form Visibility */
@@ -311,91 +360,25 @@
             transform: translateY(0);
         }
 
-        /* Hero Card Specific Background - Reverted to original */
-        #hero-card {
-            background-image: none;
-            background-color: #F0F9FF; /* Using light blue tint for hero card */
-            color: inherit;
-            text-shadow: none;
-        }
-        body.dark #hero-card {
-            background-color: #364756; /* Dark mode equivalent for hero card */
-        }
-
-        /* Overlay for hero card background - Removed */
-        #hero-card::before {
-            content: none;
-        }
-
-        #hero-card > * {
-            position: static;
-            z-index: auto;
-        }
-
-        /* Styling for icons in hero description - Removed */
-        .hero-description-item {
-            display: block;
-            align-items: initial;
-            justify-content: initial;
-            gap: 0;
-            margin-bottom: 0;
-        }
-
-        .hero-description-item svg {
-            display: none;
-        }
-
         /* AI Section Specific Styles */
         #ai-showcase-section {
             position: relative;
-            /* Remove fixed background color to let canvas show through */
             background-color: transparent; 
             color: #e2e8f0; /* Light text for content over canvas */
             overflow: hidden; /* Ensure canvas doesn't overflow */
         }
 
-        #ai-canvas {
-            position: fixed; /* Changed to fixed to cover entire viewport */
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Behind all content */
-        }
-
-        #ai-content {
-            position: relative;
-            z-index: 1; /* Above canvas */
-            padding: 4rem 0; /* Add padding for content */
-        }
-
-        /* Gradient Button Styles */
+        /* Gradient Button Styles - applied to button-3d class */
         .gradient-button {
-            background-image: linear-gradient(to right, #0057FF, #00C6FF); /* Blue gradient */
-            box-shadow: 0 4px 15px rgba(0, 87, 255, 0.4); /* Soft shadow */
+            background-image: linear-gradient(to right, #4f46e5, #8b5cf6); /* Blue to purple gradient */
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.4); /* Soft shadow matching gradient */
             transition: all 0.3s ease;
         }
 
         .gradient-button:hover {
             background-position: 100% 0;
-            box-shadow: 0 6px 20px rgba(0, 87, 255, 0.6);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.6);
             transform: translateY(-2px);
-        }
-
-        /* Ensure existing accent buttons also get gradient */
-        .bg-accent {
-            background-image: linear-gradient(to right, #0057FF, #00C6FF);
-            background-color: transparent; /* Override solid color */
-        }
-
-        .bg-accent:hover {
-            background-image: linear-gradient(to left, #0057FF, #00C6FF); /* Reverse gradient on hover */
-        }
-
-        /* Adjust button-hover for gradient buttons */
-        .button-hover:hover {
-            transform: scale(1.02); /* Less aggressive scale for gradient buttons */
-            box-shadow: 0 6px 20px rgba(0, 87, 255, 0.6); /* Stronger shadow on hover */
         }
 
         /* Loading indicator for AI text generation */
@@ -432,15 +415,18 @@
                     .5em 0 0 white;
             }
         }
-        body.dark .loading-dots {
+        .loading-dots {
             color: white; /* Ensure dots are visible in dark mode */
         }
 
         /* Chatbot specific styles */
         #chatbot-container {
-            background-color: #2d3748; /* Dark background for chatbot */
+            background: rgba(255, 255, 255, 0.08); /* Glassmorphism for chatbot */
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 1rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
             display: flex;
             flex-direction: column;
             max-width: 600px;
@@ -453,8 +439,8 @@
             padding: 1rem;
             overflow-y: auto;
             max-height: 400px; /* Limit chat height */
-            background-color: #1a202c; /* Even darker background for messages */
-            border-bottom: 1px solid #4a5568;
+            background-color: rgba(0, 0, 0, 0.1); /* Slightly darker for messages */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         .chat-message {
@@ -463,7 +449,7 @@
         }
 
         .chat-message.user .message-bubble {
-            background-color: #0057FF; /* Accent blue for user */
+            background: linear-gradient(135deg, #4f46e5, #8b5cf6); /* Accent gradient for user */
             color: white;
             margin-left: auto;
             border-bottom-right-radius: 0;
@@ -472,8 +458,8 @@
         }
 
         .chat-message.bot .message-bubble {
-            background-color: #4a5568; /* Gray for bot */
-            color: #e2e8f0;
+            background: rgba(255, 255, 255, 0.15); /* Glassy background for bot */
+            color: #e0e0e0;
             margin-right: auto;
             border-bottom-left-radius: 0;
             border-top-right-radius: 0.75rem;
@@ -490,17 +476,17 @@
             padding: 1rem;
             display: flex;
             gap: 0.5rem;
-            background-color: #2d3748;
+            background: rgba(255, 255, 255, 0.05); /* Match chatbot container */
         }
 
         #chat-input {
             flex-grow: 1;
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
-            background-color: #4a5568;
+            background-color: rgba(255, 255, 255, 0.1); /* Input background */
             color: #e2e8f0;
-            border: 1px solid #6b7280;
-            focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent;
         }
         #chat-input::placeholder {
             color: #a0aec0;
@@ -516,73 +502,98 @@
 
         /* Clearer text boxes */
         textarea, input[type="text"], input[type="email"], input[type="file"] {
-            background-color: #f8fafc; /* light-gray-50 */
-            border: 1px solid #cbd5e0; /* light-gray-300 */
-            color: #1a202c; /* dark-gray-900 */
+            background-color: rgba(255, 255, 255, 0.1); /* Light transparent background */
+            border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle border */
+            color: #e2e8f0; /* Light text */
             padding: 0.75rem 1rem;
             border-radius: 0.5rem;
             transition: border-color 0.2s ease, box-shadow 0.2s ease;
         }
 
         textarea:focus, input[type="text"]:focus, input[type="email"]:focus, input[type="file"]:focus {
-            border-color: #0057FF;
-            box-shadow: 0 0 0 3px rgba(0, 87, 255, 0.2);
+            border-color: #60a5fa; /* Blue focus ring */
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
             outline: none;
         }
 
-        body.dark textarea, body.dark input[type="text"], body.dark input[type="email"], body.dark input[type="file"] {
-            background-color: #4a5568; /* dark-gray-700 */
-            border-color: #6b7280; /* dark-gray-600 */
-            color: #e2e8f0; /* light-gray-200 */
+        textarea::placeholder, input::placeholder {
+            color: #a0aec0; /* Light gray placeholder */
         }
 
-        body.dark textarea::placeholder, body.dark input::placeholder {
-            color: #a0aec0; /* light-gray-400 */
+        /* Collapsible card styles */
+        .collapsible-card-header {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px 15px 0 0; /* Rounded top corners */
+        }
+
+        .collapsible-card-header:hover {
+            background: rgba(255, 255, 255, 0.1); /* Slightly more opaque on hover */
+        }
+
+        .collapsible-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
+            opacity: 0;
+            padding: 0 1.5rem; /* Padding for content */
+        }
+
+        .collapsible-card-content.open {
+            max-height: 1000px; /* Adjust as needed for content height */
+            opacity: 1;
+            padding-bottom: 1.5rem; /* Add padding to bottom when open */
+        }
+
+        .collapsible-card-header .arrow-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-card-header.open .arrow-icon {
+            transform: rotate(90deg);
         }
     </style>
 </head>
-<body class="bg-white text-gray-800 antialiased">
+<body class="bg-gray-900 text-gray-100 antialiased">
 
-    <!-- AI Canvas (fixed to background) -->
-    <canvas id="ai-canvas"></canvas>
+    <!-- Futuristic Canvas (fixed to background) -->
+    <canvas id="futuristic-canvas"></canvas>
 
     <!-- Header & Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-transparent backdrop-blur-sm shadow-sm">
+    <header class="fixed top-0 left-0 right-0 z-50 header-bg shadow-lg">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-xl font-bold text-gray-900 dark:text-e2e8f0 flex items-center space-x-2">
-                <!-- Logo SVG -->
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M12 2L2 7V17L12 22L22 17V7L12 2Z" fill="#0057FF" stroke="#0057FF" stroke-width="1.5"/>
-                    <path d="M12 4.75L4.25 8.5V15.5L12 19.25L19.75 15.5V8.5L12 4.75Z" fill="#00C6FF" stroke="#00C6FF" stroke-width="1.5"/>
-                    <path d="M12 7.5L7 10V14L12 16.5L17 14V10L12 7.5Z" fill="#FFFFFF" stroke="#FFFFFF" stroke-width="1"/>
-                    <text x="12" y="14.5" font-family="Inter, sans-serif" font-size="8" font-weight="bold" text-anchor="middle" fill="#0057FF">NP</text>
-                </svg>
+            <a href="#" class="text-3xl font-extrabold text-white flex items-center space-x-2 neon-glow-blue">
+                <!-- Logo text only -->
                 <span>Namani Prasad</span>
             </a>
             <nav class="hidden md:flex space-x-8">
-                <a href="#ai-features-section" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">AI Features</a>
-                <a href="#chatbot-section" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">AI Chatbot</a>
-                <a href="#my-projects" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">My Projects</a>
-                <a href="#about" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">About</a>
-                <a href="#contact" class="text-gray-700 dark:text-cbd5e0 font-medium nav-link-hover">Contact</a>
+                <a href="#ai-features-section" class="font-medium nav-link-hover neon-glow-purple">AI Features</a>
+                <a href="#chatbot-section" class="font-medium nav-link-hover neon-glow-blue">AI Chatbot</a>
+                <a href="#my-projects" class="font-medium nav-link-hover neon-glow-purple">My Projects</a>
+                <a href="#about" class="font-medium nav-link-hover neon-glow-blue">About</a>
+                <a href="#contact" class="font-medium nav-link-hover neon-glow-purple">Contact</a>
             </nav>
-            <a href="#contact" class="hidden md:block bg-accent text-white px-4 py-2 rounded-lg hover:bg-accent-dark transition-colors button-hover gradient-button">
+            <a href="#contact" class="border border-blue-500 text-blue-400 px-6 py-2 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-colors button-hover button-3d hidden md:block">
                 Get in Touch
             </a>
             <!-- Mobile Menu Button -->
-            <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-e2e8f0">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <button id="mobile-menu-button" class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
                 </svg>
             </button>
         </div>
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-blue-100 dark:bg-gray-800">
-            <a href="#ai-features-section" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">AI Features</a>
-            <a href="#chatbot-section" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">AI Chatbot</a>
-            <a href="#my-projects" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">My Projects</a>
-            <a href="#about" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">About</a>
-            <a href="#contact" class="block text-center py-2 px-4 text-sm text-gray-600 dark:text-a0aec0 hover:bg-blue-200 dark:hover:bg-gray-700">Contact</a>
+        <div id="mobile-menu" class="hidden md:hidden bg-black bg-opacity-80">
+            <a href="#ai-features-section" class="block text-center py-3 px-4 text-lg text-gray-300 hover:bg-gray-800 neon-glow-purple">AI Features</a>
+            <a href="#chatbot-section" class="block text-center py-3 px-4 text-lg text-gray-300 hover:bg-gray-800 neon-glow-blue">AI Chatbot</a>
+            <a href="#my-projects" class="block text-center py-3 px-4 text-lg text-gray-300 hover:bg-gray-800 neon-glow-purple">My Projects</a>
+            <a href="#about" class="block text-center py-3 px-4 text-lg text-gray-300 hover:bg-gray-800 neon-glow-blue">About</a>
+            <a href="#contact" class="block text-center py-3 px-4 text-lg text-gray-300 hover:bg-gray-800 neon-glow-purple">Contact</a>
         </div>
     </header>
 
@@ -592,90 +603,103 @@
         <button id="close-beta-message" class="text-yellow-900 hover:text-red-700 font-bold text-lg leading-none">&times;</button>
     </div>
 
-    <main class="container mx-auto px-6 pt-24 md:pt-32">
+    <main class="container mx-auto px-6 main-content-padding relative z-10">
 
         <!-- AI Powered Hero Section -->
         <section id="ai-showcase-section" class="relative min-h-screen flex items-center justify-center text-center py-20">
-            <!-- ai-canvas is now fixed, so it's not directly inside this section's flow -->
             <div id="ai-content" class="relative z-10 max-w-4xl mx-auto">
-                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-white">
-                    Experience the Future with <span class="text-accent">AI-Powered Web Solutions</span>
+                <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-4 text-white neon-glow-blue">
+                    Experience the Future with <span class="neon-glow-purple">AI-Powered Web Solutions</span>
                 </h1>
                 <p class="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-8">
                     Leveraging cutting-edge artificial intelligence to build intelligent, dynamic, and visually stunning web applications.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center items-center gap-4 mb-12">
-                    <button id="explore-ai-features-button" class="px-8 py-4 rounded-lg text-lg font-semibold transition-all transform button-hover gradient-button text-white">
+                    <button id="explore-ai-features-button" class="px-8 py-4 rounded-lg text-lg font-semibold transition-all transform button-hover button-3d text-white">
                         Explore AI Features
                     </button>
                 </div>
             </div>
         </section>
 
-        <!-- AI Features Section (Initially Hidden) -->
-        <section id="ai-features-section" class="py-20 hidden">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-accent text-center fade-in-up">Interactive AI Tools</h2>
+        <!-- AI Features Section -->
+        <section id="ai-features-section" class="py-20">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center neon-glow-purple fade-in-up">Interactive AI Tools</h2>
 
-            <!-- AI Text Generation Feature -->
-            <div id="ai-text-generator" class="bg-card-light modern-card dark:bg-card-dark p-6 rounded-xl shadow-lg mt-12 fade-in-up">
-                <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-e2e8f0">AI Text Generator</h3>
-                <p class="text-gray-600 dark:text-a0aec0 mb-4">Enter a prompt and let our AI generate creative text for you!</p>
-                <textarea id="ai-prompt-input" class="w-full p-3 rounded-lg bg-white text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent mb-4 dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" rows="4" placeholder="e.g., Write a short poem about a starry night..."></textarea>
-                <button id="generate-text-button" class="gradient-button text-white px-6 py-3 rounded-lg font-semibold w-full button-hover">
-                    Generate Text
-                </button>
-                <div id="ai-response-container" class="mt-6 p-4 bg-gray-200 rounded-lg text-gray-700 text-left min-h-[100px] flex items-center justify-center dark:bg-gray-700 dark:text-gray-200">
-                    <p id="ai-response-text" class="text-gray-500 dark:text-gray-400">Your generated text will appear here...</p>
-                    <div id="ai-loading-indicator" class="loading-dots hidden text-gray-700 dark:text-gray-200 text-xl">Generating</div>
+            <!-- AI Text Generation Feature Card -->
+            <div id="ai-text-generator-card" class="glass-panel p-0 rounded-xl shadow-lg mt-12 fade-in-up">
+                <div class="collapsible-card-header" data-target="ai-text-generator-content">
+                    <h3 class="text-2xl font-bold neon-glow-blue">AI Text Generator</h3>
+                    <svg class="arrow-icon w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
+                <div id="ai-text-generator-content" class="collapsible-card-content">
+                    <p class="text-gray-300 mb-4">Enter a prompt and let our AI generate creative text for you!</p>
+                    <textarea id="ai-prompt-input" class="w-full p-3 rounded-lg bg-transparent text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent mb-4" rows="4" placeholder="e.g., Write a short poem about a starry night..."></textarea>
+                    <button id="generate-text-button" class="button-3d text-white px-6 py-3 rounded-lg font-semibold w-full button-hover">
+                        Generate Text
+                    </button>
+                    <div id="ai-response-container" class="mt-6 p-4 glass-panel rounded-lg text-gray-200 text-left min-h-[100px] flex items-center justify-center">
+                        <p id="ai-response-text" class="text-gray-400">Your generated text will appear here...</p>
+                        <div id="ai-loading-indicator" class="loading-dots hidden text-gray-200 text-xl">Generating</div>
+                    </div>
                 </div>
             </div>
 
-            <!-- AI Image Generation Section -->
-            <div id="ai-image-generation-section" class="py-10 bg-card-light modern-card dark:bg-card-dark my-10 fade-in-up">
-                <div class="p-8 text-center">
-                    <h3 class="text-2xl font-bold mb-4 text-accent">AI Image Generator</h3>
-                    <p class="text-gray-600 dark:text-a0aec0 max-w-2xl mx-auto mb-8">
+            <!-- AI Image Generation Card -->
+            <div id="ai-image-generation-card" class="glass-panel p-0 my-10 fade-in-up">
+                <div class="collapsible-card-header" data-target="ai-image-generation-content">
+                    <h3 class="text-2xl font-bold neon-glow-purple">AI Image Generator</h3>
+                    <svg class="arrow-icon w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
+                <div id="ai-image-generation-content" class="collapsible-card-content">
+                    <p class="text-gray-300 max-w-2xl mx-auto mb-8">
                         Describe the image you want to create, and our AI will bring it to life.
                     </p>
                     <div class="max-w-xl mx-auto space-y-4">
-                        <textarea id="image-prompt-input" class="w-full p-3 rounded-lg bg-white text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" rows="3" placeholder="e.g., A futuristic city at sunset with flying cars..."></textarea>
-                        <button id="generate-image-button" class="gradient-button text-white px-6 py-3 rounded-lg font-semibold w-full button-hover">
+                        <textarea id="image-prompt-input" class="w-full p-3 rounded-lg bg-transparent text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" rows="3" placeholder="e.g., A futuristic city at sunset with flying cars..."></textarea>
+                        <button id="generate-image-button" class="button-3d text-white px-6 py-3 rounded-lg font-semibold w-full button-hover">
                             Generate Image
                         </button>
-                        <div id="image-output-container" class="mt-6 p-4 bg-gray-200 rounded-lg flex items-center justify-center min-h-[250px] dark:bg-gray-700">
-                            <img id="generated-image" src="https://placehold.co/400x250/EAEAEA/111111?text=Generated+Image" alt="Generated Image Placeholder" class="max-w-full h-auto rounded-lg hidden">
-                            <p id="image-placeholder-text" class="text-gray-500 dark:text-gray-400">Your generated image will appear here.</p>
-                            <div id="image-loading-indicator" class="loading-dots hidden text-gray-700 dark:text-gray-200 text-xl">Generating Image</div>
+                        <div id="image-output-container" class="mt-6 p-4 glass-panel rounded-lg flex items-center justify-center min-h-[250px]">
+                            <img id="generated-image" src="https://placehold.co/400x250/000000/FFFFFF?text=Generated+Image" alt="Generated Image Placeholder" class="max-w-full h-auto rounded-lg hidden">
+                            <p id="image-placeholder-text" class="text-gray-400">Your generated image will appear here.</p>
+                            <div id="image-loading-indicator" class="loading-dots hidden text-gray-200 text-xl">Generating Image</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- AI Image Understanding Section -->
-            <div id="ai-image-understanding-section" class="py-10 bg-card-light modern-card dark:bg-card-dark my-10 fade-in-up">
-                <div class="p-8 text-center">
-                    <h3 class="text-2xl font-bold mb-4 text-accent">AI Image Comprehension</h3>
-                    <p class="text-lg md:text-xl text-gray-600 dark:text-a0aec0 max-w-2xl mx-auto mb-8">
+            <!-- AI Image Understanding Card -->
+            <div id="ai-image-understanding-card" class="glass-panel p-0 my-10 fade-in-up">
+                <div class="collapsible-card-header" data-target="ai-image-understanding-content">
+                    <h3 class="text-2xl font-bold neon-glow-blue">AI Image Comprehension</h3>
+                    <svg class="arrow-icon w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div>
+                <div id="ai-image-understanding-content" class="collapsible-card-content">
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8">
                         Upload an image, and our AI will describe what it sees.
                     </p>
                     <div class="max-w-xl mx-auto space-y-4">
-                        <input type="file" id="image-upload-input" accept="image/*" class="w-full p-3 rounded-lg bg-white text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-                        <button id="analyze-image-button" class="gradient-button text-white px-6 py-3 rounded-lg font-semibold w-full button-hover">
+                        <input type="file" id="image-upload-input" accept="image/*" class="w-full p-3 rounded-lg bg-transparent text-gray-200 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <button id="analyze-image-button" class="button-3d text-white px-6 py-3 rounded-lg font-semibold w-full button-hover">
                             Analyze Image
                         </button>
-                        <div id="image-analysis-output-container" class="mt-6 p-4 bg-gray-200 rounded-lg text-gray-700 text-left min-h-[100px] flex items-center justify-center dark:bg-gray-700 dark:text-gray-200">
-                            <p id="analysis-result-text" class="text-gray-500 dark:text-gray-400">Image analysis result will appear here.</p>
-                            <div id="analysis-loading-indicator" class="loading-dots hidden text-gray-700 dark:text-gray-200 text-xl">Analyzing Image</div>
+                        <div id="image-analysis-output-container" class="mt-6 p-4 glass-panel rounded-lg text-gray-200 text-left min-h-[100px] flex items-center justify-center">
+                            <p id="analysis-result-text" class="text-gray-400">Image analysis result will appear here.</p>
+                            <div id="analysis-loading-indicator" class="loading-dots hidden text-gray-200 text-xl">Analyzing Image</div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- AI Chatbot Section -->
-        <section id="chatbot-section" class="py-20">
-            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-accent text-center fade-in-up">AI Digital Assistant</h2>
-            <div id="chatbot-container" class="fade-in-up">
+        <!-- AI Chatbot Section Card -->
+        <section id="chatbot-section-card" class="py-20 glass-panel p-0">
+            <div class="collapsible-card-header" data-target="chatbot-container">
+                <h2 class="text-3xl md:text-4xl font-bold neon-glow-blue">AI Digital Assistant</h2>
+                <svg class="arrow-icon w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+            </div>
+            <div id="chatbot-container" class="collapsible-card-content">
                 <div id="chat-messages" class="flex flex-col space-y-4">
                     <!-- Chat messages will be appended here -->
                     <div class="chat-message bot">
@@ -684,53 +708,53 @@
                 </div>
                 <div id="chat-input-container">
                     <input type="text" id="chat-input" placeholder="Ask me anything about Namani Prasad..." class="flex-grow">
-                    <button id="send-chat-button" class="gradient-button text-white button-hover">Send</button>
+                    <button id="send-chat-button" class="button-3d text-white button-hover">Send</button>
                 </div>
             </div>
         </section>
 
         <!-- My Projects Section -->
         <section id="my-projects" class="py-20">
-            <h2 class="text-3xl font-bold text-center mb-12 fade-in-up text-accent">My Projects</h2>
+            <h2 class="text-3xl font-bold text-center mb-12 neon-glow-purple fade-in-up">My Projects</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
                 
                 <!-- Project Card 1 -->
-                <div class="bg-card-light modern-card fade-in-up project-card dark:bg-card-dark" data-project-id="ecommerce">
+                <div class="glass-panel project-card fade-in-up" data-project-id="ecommerce">
                     <img src="https://placehold.co/600x400/0057FF/FFFFFF?text=E-commerce+Platform" alt="E-commerce Platform Screenshot" class="w-full h-64 object-cover rounded-t-xl">
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-e2e8f0">E-commerce Platform</h3>
-                        <p class="text-gray-600 dark:text-a0aec0 mb-4">Developed a full-stack e-commerce solution with a React frontend, Node.js/Express API, and MongoDB database.</p>
-                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                        <h3 class="text-2xl font-bold mb-2 neon-glow-blue">E-commerce Platform</h3>
+                        <p class="text-gray-300 mb-4">Developed a full-stack e-commerce solution with a React frontend, Node.js/Express API, and MongoDB database.</p>
+                        <a href="#" class="text-blue-400 font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
                     </div>
                 </div>
 
                 <!-- Project Card 2 -->
-                <div class="bg-card-light modern-card fade-in-up project-card dark:bg-card-dark" style="transition-delay: 150ms;" data-project-id="dashboard">
+                <div class="glass-panel project-card fade-in-up" style="transition-delay: 150ms;" data-project-id="dashboard">
                     <img src="https://placehold.co/600x400/111111/FFFFFF?text=Project+Dashboard" alt="Project Dashboard Screenshot" class="w-full h-64 object-cover rounded-t-xl">
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-e2e8f0">Project Management Dashboard</h3>
-                        <p class="text-gray-600 dark:text-a0aec0 mb-4">A real-time project management tool using Vue.js and Firebase, featuring collaborative task tracking.</p>
-                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                        <h3 class="text-2xl font-bold mb-2 neon-glow-purple">Project Management Dashboard</h3>
+                        <p class="text-gray-300 mb-4">A real-time project management tool using Vue.js and Firebase, featuring collaborative task tracking.</p>
+                        <a href="#" class="text-purple-400 font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
                     </div>
                 </div>
 
                 <!-- Project Card 3 -->
-                <div class="bg-card-light modern-card fade-in-up project-card dark:bg-card-dark" style="transition-delay: 300ms;" data-project-id="restapi">
+                <div class="glass-panel project-card fade-in-up" style="transition-delay: 300ms;" data-project-id="restapi">
                     <img src="https://placehold.co/600x400/EAEAEA/111111?text=RESTful+API" alt="RESTful API Screenshot" class="w-full h-64 object-cover rounded-t-xl">
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-e2e8f0">RESTful API Service</h3>
-                        <p class="text-gray-600 dark:text-a0aec0 mb-4">Designed and deployed a secure and scalable RESTful API for a mobile application using Python, Flask, and PostgreSQL.</p>
-                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                        <h3 class="text-2xl font-bold mb-2 neon-glow-blue">RESTful API Service</h3>
+                        <p class="text-gray-300 mb-4">Designed and deployed a secure and scalable RESTful API for a mobile application using Python, Flask, and PostgreSQL.</p>
+                        <a href="#" class="text-blue-400 font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
                     </div>
                 </div>
 
                 <!-- Project Card 4 -->
-                <div class="bg-card-light modern-card fade-in-up project-card dark:bg-card-dark" style="transition-delay: 450ms;" data-project-id="cicd">
+                <div class="glass-panel project-card fade-in-up" style="transition-delay: 450ms;" data-project-id="cicd">
                     <img src="https://placehold.co/600x400/333333/FFFFFF?text=DevOps+Pipeline" alt="DevOps Pipeline Screenshot" class="w-full h-64 object-cover rounded-t-xl">
                     <div class="p-8">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900 dark:text-e2e8f0">CI/CD Pipeline Automation</h3>
-                        <p class="text-gray-600 dark:text-a0aec0 mb-4">Implemented a complete CI/CD pipeline using Jenkins and Docker, automating testing and deployment.</p>
-                        <a href="#" class="text-accent font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
+                        <h3 class="text-2xl font-bold mb-2 neon-glow-purple">CI/CD Pipeline Automation</h3>
+                        <p class="text-gray-300 mb-4">Implemented a complete CI/CD pipeline using Jenkins and Docker, automating testing and deployment.</p>
+                        <a href="#" class="text-purple-400 font-semibold hover:underline" onclick="event.stopPropagation();">View on GitHub &rarr;</a>
                     </div>
                 </div>
 
@@ -739,87 +763,27 @@
 
         <!-- About Section -->
         <section id="about" class="py-20">
-            <div class="bg-card-light modern-card my-20 fade-in-up p-8 grid md:grid-cols-3 gap-10 items-center dark:bg-card-dark">
-                <div class="md:col-span-1">
-                    <img src="https://placehold.co/400x400/0057FF/FFFFFF?text=Your+Photo" alt="Professional headshot of Namani Prasad" class="rounded-full mx-auto w-48 h-48 md:w-full md:h-auto md:rounded-lg object-cover">
-                </div>
-                <div class="md:col-span-2 text-center md:text-left">
-                    <h2 class="text-3xl font-bold mb-4 text-accent">About Me</h2>
-                    <p class="text-gray-600 dark:text-a0aec0 mb-6">
-                        <span id="about-me-intro">I'm a FullStack Developer with a passion for building elegant solutions to complex problems.</span>
-                        <span id="about-me-personalized-content"> I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.</span>
+            <div class="glass-panel my-20 fade-in-up p-8 grid md:grid-cols-1 gap-10 items-center">
+                <div class="text-center">
+                    <img src="https://placehold.co/400x400/4f46e5/a78bfa?text=🧑‍💻Dev" alt="Professional headshot of Namani Prasad" class="rounded-full mx-auto w-48 h-48 mb-6 object-cover holographic-icon">
+                    <h2 class="text-3xl font-bold mb-4 neon-glow-blue">About Me</h2>
+                    <p class="text-gray-300 mb-6">
+                        I'm a FullStack Developer with a passion for building elegant solutions to complex problems. I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.
                     </p>
-                    <div class="flex justify-center md:justify-start gap-4 mb-6">
-                        <label for="about-me-interest" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Personalize for:</label>
-                        <select id="about-me-interest" class="p-2 rounded-lg bg-white text-gray-700 border border-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600">
-                            <option value="default">General</option>
-                            <option value="tech-recruiter">Tech Recruiter</option>
-                            <option value="startup-founder">Startup Founder</option>
-                            <option value="data-scientist">Fellow Data Scientist</option>
-                        </select>
-                    </div>
                     <div class="mb-6">
-                        <h4 class="font-bold mb-2 text-gray-800 dark:text-e2e8f0">My Skills:</h4>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <!-- Skill 1 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">JavaScript (ES6+)</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="90"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 2 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">React</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="85"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 3 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Node.js</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="80"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 4 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Express</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="75"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 5 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Python</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="70"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 6 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">SQL & NoSQL</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="80"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 7 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">Docker</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="65"></div>
-                                </div>
-                            </div>
-                            <!-- Skill 8 -->
-                            <div>
-                                <p class="font-medium text-gray-800 dark:text-e2e8f0">REST APIs</p>
-                                <div class="skill-bar-container">
-                                    <div class="skill-bar-fill" data-skill-level="90"></div>
-                                </div>
-                            </div>
+                        <h4 class="font-bold mb-2 neon-glow-purple">My Skills:</h4>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2">
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">JavaScript (ES6+)</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">React</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">Node.js</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">Express</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">Python</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">SQL & NoSQL</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">Docker</span>
+                            <span class="text-gray-200 glass-panel px-3 py-1 rounded-full text-sm">REST APIs</span>
                         </div>
                     </div>
-                    <a href="#" class="border border-accent text-accent px-8 py-3 rounded-lg font-semibold hover:bg-accent hover:text-white transition-colors button-hover">
+                    <a href="#" class="border border-blue-500 text-blue-400 px-8 py-3 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-colors button-hover button-3d">
                         Download My Resume
                     </a>
                 </div>
@@ -829,30 +793,30 @@
         <!-- Contact Section -->
         <section id="contact" class="py-20">
             <div class="grid grid-cols-1 gap-10">
-                <div class="bg-card-light modern-card fade-in-up p-8 dark:bg-card-dark">
-                    <h2 class="text-3xl md:text-4xl font-bold mb-4 text-accent text-center">Have a project in mind?</h2>
-                    <p class="text-lg md:text-xl text-gray-600 dark:text-a0aec0 max-w-2xl mx-auto mb-8 text-center">
+                <div class="glass-panel fade-in-up p-8">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4 neon-glow-blue text-center">Have a project in mind?</h2>
+                    <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 text-center">
                         I'm currently available for freelance work and open to discussing new opportunities. Let's build something amazing together.
                     </p>
                     <div class="text-center mb-8">
-                        <button id="open-contact-form-button" class="bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-dark transition-all transform button-hover gradient-button">
+                        <button id="open-contact-form-button" class="border border-blue-500 text-blue-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-blue-500 hover:text-white transition-colors button-hover button-3d">
                             Get in Touch
                         </button>
                     </div>
                     <form id="contact-form" class="max-w-xl mx-auto space-y-4 contact-form-hidden">
                         <div>
-                            <label for="name" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Name</label>
-                            <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" placeholder="Your Name" required>
+                            <label for="name" class="block text-gray-300 text-sm font-bold mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent" placeholder="Your Name" required>
                         </div>
                         <div>
-                            <label for="email" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Email</label>
-                            <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" placeholder="your@example.com" required>
+                            <label for="email" class="block text-gray-300 text-sm font-bold mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent" placeholder="your@example.com" required>
                         </div>
                         <div>
-                            <label for="message" class="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">Message</label>
-                            <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent dark:bg-gray-700 dark:text-gray-200 dark:border-gray-600" placeholder="Tell me about your project..." required></textarea>
+                            <label for="message" class="block text-gray-300 text-sm font-bold mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-200 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent bg-transparent" placeholder="Tell me about your project..." required></textarea>
                         </div>
-                        <button type="submit" class="bg-accent text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-accent-dark transition-all transform button-hover gradient-button w-full">
+                        <button type="submit" class="button-3d text-white px-8 py-4 rounded-lg text-lg font-semibold w-full hover:scale-105">
                             Send Message
                         </button>
                         <div id="form-status-message" class="form-message hidden"></div>
@@ -864,61 +828,41 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-blue-900 text-white dark:bg-gray-900">
-        <div class="container mx-auto px-6 py-8 text-center">
+    <footer class="w-full bg-black bg-opacity-70 text-gray-400 py-8 mt-12 relative z-10">
+        <div class="container mx-auto px-6 text-center">
             <div class="flex justify-center space-x-6 mb-4">
                 <!-- LinkedIn Icon -->
-                <a href="#" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="LinkedIn">
+                <a href="#" class="text-blue-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-blue" aria-label="LinkedIn">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
                 </a>
                 <!-- GitHub Icon -->
-                <a href="#" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="GitHub">
+                <a href="#" class="text-purple-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-purple" aria-label="GitHub">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
                 </a>
                 <!-- Twitter (X) Icon -->
-                <a href="#" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Twitter">
+                <a href="#" class="text-blue-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-blue" aria-label="Twitter">
                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
                 </a>
                 <!-- Mail Icon -->
-                <a href="mailto:prasadnamani789@gmail.com" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Email">
+                <a href="mailto:prasadnamani789@gmail.com" class="text-purple-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-purple" aria-label="Email">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-8.97 5.71a1.8 1.8 0 0 1-2.06 0L2 7"></path></svg>
                 </a>
                 <!-- Instagram Icon -->
-                <a href="#" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Instagram">
+                <a href="#" class="text-blue-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-blue" aria-label="Instagram">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg>
                 </a>
                 <!-- YouTube Icon -->
-                <a href="#" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="YouTube">
+                <a href="#" class="text-purple-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-purple" aria-label="YouTube">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6-1.58a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.58 8.6 1.58 8.6 1.58s6.88 0 8.6-1.58a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
                 </a>
                 <!-- Personal Website/Blog Icon (retained) -->
-                 <a href="#" class="text-blue-200 hover:text-white transform hover:scale-110 transition-transform duration-300" aria-label="Personal Website or Blog">
+                 <a href="#" class="text-blue-400 hover:text-white transform hover:scale-110 transition-transform duration-300 neon-glow-blue" aria-label="Personal Website or Blog">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.72"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.72-1.72"></path></svg>
                 </a>
             </div>
-            <p class="text-gray-400 text-sm dark:text-gray-500">&copy; 2025 Namani Prasad. All Rights Reserved.</p>
+            <p class="text-gray-500 text-sm">&copy; 2025 Namani Prasad. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <!-- Dark Mode Toggle Button -->
-    <button id="dark-mode-toggle">
-        <!-- Sun Icon (Light Mode) -->
-        <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <circle cx="12" cy="12" r="5"></circle>
-            <line x1="12" y1="1" x2="12" y2="3"></line>
-            <line x1="12" y1="21" x2="12" y2="23"></line>
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-            <line x1="1" y1="12" x2="3" y2="12"></line>
-            <line x1="21" y1="12" x2="23" y2="12"></line>
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-        </svg>
-        <!-- Moon Icon (Dark Mode) -->
-        <svg id="moon-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-    </button>
 
     <!-- Back to Top Button -->
     <button id="back-to-top-button" aria-label="Back to top">
@@ -930,16 +874,16 @@
         <div class="modal-content">
             <button class="modal-close-button" id="close-modal-button">&times;</button>
             <img id="modal-project-image" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mb-4">
-            <h2 id="modal-project-title" class="text-3xl font-bold mb-2 text-gray-900 dark:text-e2e8f0"></h2>
-            <p id="modal-project-description" class="text-gray-700 dark:text-cbd5e0 mb-4"></p>
+            <h2 id="modal-project-title" class="text-3xl font-bold mb-2 neon-glow-blue"></h2>
+            <p id="modal-project-description" class="text-gray-300 mb-4"></p>
             <div id="modal-project-tech" class="flex flex-wrap gap-2 mb-4">
                 <!-- Technologies will be dynamically inserted here -->
             </div>
             <div class="flex gap-4">
-                <a id="modal-project-github" href="#" target="_blank" class="bg-accent text-white px-6 py-3 rounded-lg font-semibold hover:bg-accent-dark transition-colors button-hover">
+                <a id="modal-project-github" href="#" target="_blank" class="button-3d text-white px-6 py-3 rounded-lg font-semibold hover:scale-105">
                     View on GitHub
                 </a>
-                <a id="modal-project-live" href="#" target="_blank" class="border border-accent text-accent px-6 py-3 rounded-lg font-semibold hover:bg-accent hover:text-white transition-colors button-hover">
+                <a id="modal-project-live" href="#" target="_blank" class="border border-blue-500 text-blue-400 px-6 py-3 rounded-lg font-semibold hover:bg-blue-500 hover:text-white transition-colors button-hover button-3d">
                     Live Demo
                 </a>
             </div>
@@ -982,43 +926,6 @@
 
         faders.forEach(fader => {
             appearOnScroll.observe(fader);
-        });
-
-        // Dark Mode Logic
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        const sunIcon = document.getElementById('sun-icon');
-        const moonIcon = document.getElementById('moon-icon');
-        const body = document.body;
-
-        // Function to set the theme
-        function setTheme(isDarkMode) {
-            if (isDarkMode) {
-                body.classList.add('dark');
-                sunIcon.classList.remove('hidden');
-                moonIcon.classList.add('hidden');
-                localStorage.setItem('theme', 'dark');
-            } else {
-                body.classList.remove('dark');
-                moonIcon.classList.remove('hidden');
-                sunIcon.classList.add('hidden');
-                localStorage.setItem('theme', 'light');
-            }
-        }
-
-        // Check for saved theme preference or system preference on load
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme) {
-            setTheme(savedTheme === 'dark');
-        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-            // If no saved theme, check system preference
-            setTheme(true);
-        } else {
-            setTheme(false); // Default to light mode
-        }
-
-        // Toggle theme on button click
-        darkModeToggle.addEventListener('click', () => {
-            setTheme(!body.classList.contains('dark'));
         });
 
         // Project Modal Logic
@@ -1101,7 +1008,7 @@
                 modalProjectTech.innerHTML = '';
                 project.technologies.forEach(tech => {
                     const span = document.createElement('span');
-                    span.className = 'bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-sm dark:bg-gray-700 dark:text-gray-200';
+                    span.className = 'bg-gray-700 text-gray-200 px-3 py-1 rounded-full text-sm glass-panel'; /* Use glass-panel for tech tags */
                     span.textContent = tech;
                     modalProjectTech.appendChild(span);
                 });
@@ -1148,24 +1055,6 @@
                 closeProjectModal();
             }
         });
-
-        // Skill Bar Animation Logic
-        const skillBars = document.querySelectorAll('.skill-bar-fill');
-        const aboutSection = document.getElementById('about');
-
-        const skillBarObserver = new IntersectionObserver(function(entries, observer) {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    skillBars.forEach(bar => {
-                        const level = bar.dataset.skillLevel;
-                        bar.style.width = `${level}%`;
-                    });
-                    observer.unobserve(aboutSection); // Stop observing once animated
-                }
-            });
-        }, { threshold: 0.5 }); // Trigger when 50% of the about section is visible
-
-        skillBarObserver.observe(aboutSection);
 
         // Contact Form Submission Logic
         const contactForm = document.getElementById('contact-form');
@@ -1243,7 +1132,7 @@
         });
 
         // AI Canvas and Interaction Logic
-        const canvas = document.getElementById('ai-canvas');
+        const canvas = document.getElementById('futuristic-canvas');
         const ctx = canvas.getContext('2d');
         const aiShowcaseSection = document.getElementById('ai-showcase-section');
 
@@ -1368,6 +1257,17 @@
             aiFeaturesSection.scrollIntoView({ behavior: 'smooth', block: 'start' }); // Scroll to it
         });
 
+        // Collapsible Card Logic for AI Tools
+        document.querySelectorAll('.collapsible-card-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const targetId = header.dataset.target;
+                const content = document.getElementById(targetId);
+                
+                // Toggle 'open' class on the header and content
+                header.classList.toggle('open');
+                content.classList.toggle('open');
+            });
+        });
 
         // AI Text Generation with Gemini API
         const aiPromptInput = document.getElementById('ai-prompt-input');
@@ -1385,7 +1285,7 @@
 
             aiResponseText.textContent = ''; // Clear previous response
             aiLoadingIndicator.classList.remove('hidden');
-            aiResponseText.style.color = '#e2e8f0'; // Revert to default text color
+            aiResponseText.style.color = '#e0e0e0'; // Revert to default text color
 
             try {
                 let chatHistory = [];
@@ -1634,26 +1534,6 @@
                 sendChatMessage();
             }
         });
-
-        // AI-driven Content Personalization for 'About Me'
-        const aboutMeInterestSelector = document.getElementById('about-me-interest');
-        const aboutMePersonalizedContent = document.getElementById('about-me-personalized-content');
-
-        const aboutMeContent = {
-            default: "I enjoy working across the entire stack, from crafting pixel-perfect user interfaces to designing robust server-side architecture. I'm a lifelong learner, always excited to pick up new technologies and improve my craft.",
-            "tech-recruiter": "I specialize in building scalable and efficient web applications, with a strong focus on modern frameworks and robust backend systems. My experience spans the full software development lifecycle, from concept to deployment.",
-            "startup-founder": "I'm passionate about bringing innovative ideas to life through technology. I thrive in fast-paced environments and am skilled at rapidly prototyping and iterating on products to achieve market fit. My expertise allows me to build robust MVPs and scale them effectively.",
-            "data-scientist": "My background includes a strong foundation in data analysis, machine learning, and AI model deployment. I'm adept at leveraging data to drive insights and build intelligent features into applications, from predictive analytics to natural language processing."
-        };
-
-        function updateAboutMeContent() {
-            const selectedInterest = aboutMeInterestSelector.value;
-            aboutMePersonalizedContent.textContent = aboutMeContent[selectedInterest];
-        }
-
-        aboutMeInterestSelector.addEventListener('change', updateAboutMeContent);
-        // Initial update
-        updateAboutMeContent();
 
         // Beta Message Logic
         const betaMessageBanner = document.getElementById('beta-message-banner');
